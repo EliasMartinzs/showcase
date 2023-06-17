@@ -12,13 +12,28 @@ export default function Showcase() {
         </div>
         <div className="flex flex-col lg:flex-row gap-5">
           <div className="card__skew">
-            <Image src="/bg2.jpg" fill className="object-cover bg-center" />
+            <Image
+              src="/bg2.jpg"
+              fill
+              className="object-cover bg-center"
+              alt="cars"
+            />
           </div>
           <div className="card__skew">
-            <Image src="/bg5.jpg" fill className="object-cover bg-center" />
+            <Image
+              src="/bg5.jpg"
+              fill
+              className="object-cover bg-center"
+              alt="cars"
+            />
           </div>
           <div className="card__skew">
-            <Image src="/bg6.jpg" fill className="object-cover bg-center" />
+            <Image
+              src="/bg6.jpg"
+              fill
+              className="object-cover bg-center"
+              alt="cars"
+            />
           </div>
         </div>
       </div>
