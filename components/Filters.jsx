@@ -1,37 +1,39 @@
 'use client';
-
 import { useState, Fragment } from 'react';
 
-import { Combobox } from '@headlessui/react';
 import { manufacturers } from '@/constants';
+import { Combobox, Transition } from '@headlessui/react';
+
 import Image from 'next/image';
 
-export default function Filters() {
-  const [manufacturer, setManufacturer] = useState(manufacturers);
+export default function Filters({
+  manufacturer,
+  setManufacturer,
+  model,
+  setModel,
+}) {
   const [query, setQuery] = useState('');
-  const [model, setModel] = useState('');
 
   const filteredManufacturers =
     query === ''
-      ? manufacturer
-      : manufacturer.filter(manufac =>
-          manufac
+      ? manufacturers
+      : manufacturers.filter(item =>
+          item
             .toLowerCase()
             .replace(/\s+/g, '')
             .includes(query.toLowerCase().replace(/\s+/g, ''))
         );
 
-  const handleCar = e => {
+  const handleCarModel = e => {
     e.preventDefault();
-    console.log(query, model);
   };
 
   return (
-    <div className="w-full mt-10 mx-auto px-10">
-      <h4 className="text-xl font-extralight py-2">
-        Chose make and model of car.
-      </h4>
-      <div className="max-w-[12rem] flex">
+    <div className="w-full py-10 px-5">
+      <h3 className="text-xl font-extralight mb-5">
+        Chose the cars with make and model!
+      </h3>
+      <form className="flex flex-col lg:flex-row gap-5">
         <Combobox
           value={manufacturer}
           onChange={setManufacturer}
@@ -39,24 +41,18 @@ export default function Filters() {
           className="relative"
         >
           <Combobox.Input
-            onChange={event => setQuery(event.target.value)}
-            value={query}
-            name="assignee"
+            onChange={e => setQuery(e.target.value)}
+            displayValue={manufacturer => manufacturer}
             placeholder="Nissan"
-            className="w-80"
+            className="w-full lg:w-96 h-12 rounded-full outline-none hover:border-slate-950"
           />
-
-          <Combobox.Options>
+          <Combobox.Options className="select-none">
             {filteredManufacturers.map(manufac => (
               <Combobox.Option key={manufac} value={manufac}>
                 {({ active }) => (
-                  <ul className="">
+                  <ul>
                     <li
-                      className={`${
-                        active
-                          ? 'bg-slate-900 text-white'
-                          : 'bg-white text-black'
-                      }`}
+                      className={`${active ? 'bg-slate-950 text-white' : null}`}
                     >
                       {manufac}
                     </li>
@@ -66,24 +62,17 @@ export default function Filters() {
             ))}
           </Combobox.Options>
         </Combobox>
-      </div>
-      <div className="flex"></div>
-        <Combobox className="ml-5">
+        <Combobox>
           <Combobox.Input
+            onChange={e => setModel(e.target.value)}
             placeholder="350z"
-            onChange={e => setModel(e.target.value.toLowerCase())}
-            name="model"
-            value={model}
-            className=""
+            className="lg:w-96 h-12 rounded-full outline-none hover:border-slate-950"
           />
         </Combobox>
-        <button type="submit" onClick={handleCar}>
+        <button type="submit" onClick={handleCarModel}>
           <Image src="/search.png" width={50} height={50} alt="search" />
         </button>
-      </div>
+      </form>
     </div>
   );
-}
-
-{
 }
