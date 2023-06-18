@@ -1,5 +1,5 @@
 'use client';
-import { useState, Fragment } from 'react';
+import { useState } from 'react';
 
 import { manufacturers } from '@/constants';
 import { Combobox, Transition } from '@headlessui/react';

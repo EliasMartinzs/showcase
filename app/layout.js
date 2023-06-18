@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import './globals.css';
+import ReduxProvider from '@/store/Provider';
 
 export const metadata = {
   title: 'Create Next App',
@@ -11,7 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Navbar />
-        {children}
+        <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
   );

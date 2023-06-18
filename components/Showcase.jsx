@@ -1,7 +1,13 @@
+'use client';
+import { selectManufacturer } from '@/store/features/cars-selector';
 import Image from 'next/image';
 import React from 'react';
+import { useSelector } from 'react-redux';
 
 export default function Showcase() {
+  const manu = useSelector(selectManufacturer);
+  console.log(manu);
+
   return (
     <section className="bg-[#192435] py-20">
       <div className="w-full flex flex-col lg:flex-row flex-1 justify-between items-center mx-auto px-14 gap-y-10">
