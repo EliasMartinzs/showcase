@@ -12,6 +12,7 @@ export default function Navbar() {
             height={100}
             src="/logo.png"
             className="object-contain"
+            alt="logo"
           />
           <Link
             href="/"

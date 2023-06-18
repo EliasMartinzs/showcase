@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const CARS_INITIAL_STATE = {
-  manufacturer: 'manu',
+  manufacturer: '',
   model: '',
 };
 

@@ -1,18 +1,24 @@
 'use client';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { manufacturers } from '@/constants';
-import { Combobox, Transition } from '@headlessui/react';
+import { Combobox } from '@headlessui/react';
 
+import { setManufacturer, setModel } from '@/store/features/cars-slices';
 import Image from 'next/image';
+import { selectManufacturer } from '@/store/features/cars-selector';
 
-export default function Filters({
-  manufacturer,
-  setManufacturer,
-  model,
-  setModel,
-}) {
+export default function Filters() {
   const [query, setQuery] = useState('');
+
+  const dispatch = useDispatch();
+
+  const manufacturer = useSelector(selectManufacturer);
+  const handleManufacturer = dispatch(() => setManufacturer());
+  const handleModel = dispatch(() => setModel());
+
+  console.log(manufacturer);
 
   const filteredManufacturers =
     query === ''
@@ -36,7 +42,7 @@ export default function Filters({
       <form className="flex flex-col lg:flex-row gap-5">
         <Combobox
           value={manufacturer}
-          onChange={setManufacturer}
+          onChange={handleManufacturer}
           as="div"
           className="relative"
         >
@@ -44,7 +50,7 @@ export default function Filters({
             onChange={e => setQuery(e.target.value)}
             displayValue={manufacturer => manufacturer}
             placeholder="Nissan"
-            className="w-full lg:w-96 h-12 rounded-full outline-none hover:border-slate-950"
+            className="w-96 h-12 flex rounded-full outline-none hover:border-slate-950"
           />
           <Combobox.Options className="select-none">
             {filteredManufacturers.map(manufac => (
@@ -62,16 +68,16 @@ export default function Filters({
             ))}
           </Combobox.Options>
         </Combobox>
-        <Combobox>
+        <Combobox className="flex" as="div">
           <Combobox.Input
-            onChange={e => setModel(e.target.value)}
+            onChange={e => handleModel(e.target.value)}
             placeholder="350z"
-            className="lg:w-96 h-12 rounded-full outline-none hover:border-slate-950"
+            className="w-96 h-12 flex rounded-full outline-none hover:border-slate-950"
           />
+          <button type="submit" onClick={handleCarModel} className="flex">
+            <Image src="/search.png" width={50} height={50} alt="search" />
+          </button>
         </Combobox>
-        <button type="submit" onClick={handleCarModel}>
-          <Image src="/search.png" width={50} height={50} alt="search" />
-        </button>
       </form>
     </div>
   );

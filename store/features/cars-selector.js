@@ -1,1 +1,1 @@
-export const selectManufacturer = state => state.carsReducer.manufacturer;
+export const selectManufacturer = state => state.cars.manufacturer;
