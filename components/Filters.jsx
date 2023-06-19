@@ -1,24 +1,18 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { manufacturers } from '@/constants';
 import { Combobox } from '@headlessui/react';
 
-import { setManufacturer, setModel } from '@/store/features/cars-slices';
 import Image from 'next/image';
-import { selectManufacturer } from '@/store/features/cars-selector';
+import { addManufacturer, addModel } from '@/store/features/cars-slices';
 
 export default function Filters() {
   const [query, setQuery] = useState('');
-
+  const [manufacturer, setManufacturer] = useState('');
+  const [model, setModel] = useState('');
   const dispatch = useDispatch();
-
-  const manufacturer = useSelector(selectManufacturer);
-  const handleManufacturer = dispatch(() => setManufacturer());
-  const handleModel = dispatch(() => setModel());
-
-  console.log(manufacturer);
 
   const filteredManufacturers =
     query === ''
@@ -30,19 +24,26 @@ export default function Filters() {
             .includes(query.toLowerCase().replace(/\s+/g, ''))
         );
 
+  useEffect(() => {
+    dispatch(addManufacturer(manufacturer));
+    dispatch(addModel(model));
+  }, [manufacturer, model]);
+
   const handleCarModel = e => {
     e.preventDefault();
+    setManufacturer('');
+    setModel('');
   };
 
   return (
-    <div className="w-full py-10 px-5">
+    <div className="w-full p-10">
       <h3 className="text-xl font-extralight mb-5">
         Chose the cars with make and model!
       </h3>
       <form className="flex flex-col lg:flex-row gap-5">
         <Combobox
           value={manufacturer}
-          onChange={handleManufacturer}
+          onChange={setManufacturer}
           as="div"
           className="relative"
         >
@@ -70,7 +71,7 @@ export default function Filters() {
         </Combobox>
         <Combobox className="flex" as="div">
           <Combobox.Input
-            onChange={e => handleModel(e.target.value)}
+            onChange={e => setModel(e.target.value)}
             placeholder="350z"
             className="w-96 h-12 flex rounded-full outline-none hover:border-slate-950"
           />
