@@ -30,4 +30,5 @@ export default function Navbar() {
       </nav>
     </header>
   );
-}
+}export const selectManufacturer = state => state.cars.manufacturer;
+

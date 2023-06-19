@@ -1,21 +1,17 @@
-'use client';
 import fetchCars from '@/utils';
 import CarCard from './CarCard';
 
-import { useEffect } from 'react';
+export default async function Cars({ searchParams }) {
+  const allCars = await fetchCars({
+    model: 'carrera',
+  });
 
-export default async function Cars() {
-  useEffect(() => {
-    const fetchCars = async function () {
-      const allCars = await fetchCars({});
-    };
-    fetchCars();
-  }, []);
+  console.log(searchParams);
 
   return (
-    <div className="px-10">
-      <div className="flex flex-col items-center justify-center mx-auto lg:flex-row lg:grid grid-cols-3 space-y-14">
-        {results && results.map(car => <CarCard key={car} car={car} />)}
+    <div className="px-10 flex items-center justify-center">
+      <div className="flex flex-col items-center justify-center mx-auto lg:flex-row lg:grid grid-cols-3 gap-5">
+        {allCars && allCars.map(car => <CarCard key={car.id} carProps={car} />)}
       </div>
     </div>
   );

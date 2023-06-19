@@ -1,18 +1,17 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { manufacturers } from '@/constants';
 import { Combobox } from '@headlessui/react';
 
 import Image from 'next/image';
-import { addManufacturer, addModel } from '@/store/features/cars-slices';
 
 export default function Filters() {
   const [query, setQuery] = useState('');
   const [manufacturer, setManufacturer] = useState('');
   const [model, setModel] = useState('');
-  const dispatch = useDispatch();
+  const router = useRouter();
 
   const filteredManufacturers =
     query === ''
@@ -24,15 +23,39 @@ export default function Filters() {
             .includes(query.toLowerCase().replace(/\s+/g, ''))
         );
 
-  useEffect(() => {
-    dispatch(addManufacturer(manufacturer));
-    dispatch(addModel(model));
-  }, [manufacturer, model]);
-
   const handleCarModel = e => {
     e.preventDefault();
+
+    if (manufacturer === '' && model === '') {
+      return alert('Please fill in the search bar ');
+    }
+
+    updateSearchParams(model.toLowerCase(), manufacturer.toLowerCase());
+
     setManufacturer('');
     setModel('');
+  };
+
+  const updateSearchParams = (model, manufacturer) => {
+    const searchParams = new URLSearchParams(window.location.search);
+
+    if (model) {
+      searchParams.set('model', model);
+    } else {
+      searchParams.delete('model');
+    }
+
+    if (manufacturer) {
+      searchParams.set('manufacturer', manufacturer);
+    } else {
+      searchParams.delete('manufacturer');
+    }
+
+    const newPathname = `${
+      window.location.pathname
+    }?${searchParams.toString()}`;
+
+    router.push(newPathname);
   };
 
   return (
@@ -71,7 +94,7 @@ export default function Filters() {
         </Combobox>
         <Combobox className="flex" as="div">
           <Combobox.Input
-            onChange={e => setModel(e.target.value)}
+            onChange={e => setModel(e.target.value.toLowerCase())}
             placeholder="350z"
             className="w-96 h-12 flex rounded-full outline-none hover:border-slate-950"
           />
