@@ -1,4 +1,5 @@
 'use client';
+import { getCarImage } from '@/utils';
 import Image from 'next/image';
 
 const CarCard = ({ carProps }) => {
@@ -7,7 +8,7 @@ const CarCard = ({ carProps }) => {
   return (
     <div className="p-3 mt-auto border">
       <Image
-        src="/bg4.jpg"
+        src={getCarImage()}
         width={400}
         height={400}
         alt={`car`}
