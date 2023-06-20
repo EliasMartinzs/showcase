@@ -1,17 +1,26 @@
+'use client';
 import fetchCars from '@/utils';
 import CarCard from './CarCard';
 
-export default async function Cars({ searchParams }) {
+import { useSearchParams } from 'next/navigation';
+
+export default async function Cars({}) {
+  const searchParams = useSearchParams();
+
   const allCars = await fetchCars({
-    model: 'carrera',
+    model: searchParams.get('model') || 'corolla',
+    // manufacturer: searchParams.get('manufacturer') || '',
   });
 
-  console.log(searchParams);
+  const newCars = [];
+  newCars.push(allCars);
 
   return (
     <div className="px-10 flex items-center justify-center">
       <div className="flex flex-col items-center justify-center mx-auto lg:flex-row lg:grid grid-cols-3 gap-5">
-        {allCars && allCars.map(car => <CarCard key={car.id} carProps={car} />)}
+        {newCars?.map(car => (
+          <CarCard key={car.id} carProps={car} />
+        ))}
       </div>
     </div>
   );
