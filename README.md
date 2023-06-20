@@ -1,34 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Car Demo
 
-First, run the development server:
+ demonstração de carros através de duas APIs, uma que consome input do usuário e faz uma busca, desenvolvendo algumas especificações do carro que o usuário escolheu, e outra que usa dados da primeira API, consumindo dados dos carros selecionados e assim desenvolvendo imagens dos respectivos carros carros .
+ as imagens dos carros não são tão precisas devido à falta de alguns parâmetros.
+
+## Tecnologias
+- Nextjs - Reacjs - TailwindCss - HeadlessUi
+
+## Referência
+
+ - [Headless Ui](https://headlessui.com/)
+ - [Cars Api](https://rapidapi.com/apininjas/api/cars-by-api-ninjas?utm_source=youtube.com%2FJavaScriptMastery&utm_medium=referral&utm_campaign=DevRel)
+ - [Cars images Api](https://www.imagin.studio/)
+ - [Next Js](https://nextjs.org/)
+
+
+## Deploy
+
+Para fazer o deploy desse projeto rode
+
+
+faca um clone do repositorio ou baixe e depois rode no terminal comando `npm i next@latest `
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+  npm run deploy
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Screenshots
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+![mobile](https://github.com/EliasMartinzs/showcase/assets/97196276/625ce5a3-2223-48d2-85ba-8a6fe6efb492)
+![mobile (1)](https://github.com/EliasMartinzs/showcase/assets/97196276/5c9d7c47-3734-4e69-b48e-780b3d6e66d8)
+![mobile (2)](https://github.com/EliasMartinzs/showcase/assets/97196276/eab9e426-3bd1-4796-8ab6-7b07f0e14b9c)
+![mobile (3)](https://github.com/EliasMartinzs/showcase/assets/97196276/f2dd3cb7-1bf5-4a32-a147-b7474249d411)
+![mobile (4)](https://github.com/EliasMartinzs/showcase/assets/97196276/32fb0d79-5fcb-4084-b00c-2fa11be4a970)
+![desktop](https://github.com/EliasMartinzs/showcase/assets/97196276/e50568c3-1481-4e43-89fe-7b06b850493f)
+![desktop1](https://github.com/EliasMartinzs/showcase/assets/97196276/5ee69d62-879b-4b85-8431-07703cc42245)
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
