@@ -22,10 +22,8 @@ export const getCarImage = () => {
   const model = search.get('model');
   const make = search.get('manufacturer');
 
-  const key = 'brusar-api-para-estudo';
+  const key = 'brstudent-student-stude';
 
-  // const key =
-  //   'brestudante-para-se-torna-um-desenvolvedor-front-end-gostaria-de-usar-a-api-para-um-projeto-pois-sou-apaixonado-por-carro-e-esta-api-atende-mais-do-que-eu-preciso';
   const url = new URL('https://cdn.imagin.studio/getImage?');
 
   url.searchParams.append('customer', key);

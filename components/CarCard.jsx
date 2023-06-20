@@ -1,9 +1,12 @@
 'use client';
+import { useState } from 'react';
 import { getCarImage } from '@/utils';
 import Image from 'next/image';
+import CarDetails from './CarDetails';
 
 const CarCard = ({ carProps }) => {
   const { make, model, fuel_type, year, drive, transmission } = carProps;
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="p-3 mt-auto border">
@@ -35,10 +38,18 @@ const CarCard = ({ carProps }) => {
           <span>Transmission</span>
           <span>{transmission === 'a' ? 'Automatic' : 'Manual'}</span>
         </div>
-        <button className="p-2 bg-slate-950 rounded-full text-white mt-2 shadow-md hover:bg-slate-800 transition-colors">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="p-2 bg-slate-950 rounded-full text-white mt-2 shadow-md hover:bg-slate-800 transition-colors"
+        >
           More Details
         </button>
       </div>
+      <CarDetails
+        isOpen={isOpen}
+        closeModal={() => setIsOpen(false)}
+        car={carProps}
+      />
     </div>
   );
 };
